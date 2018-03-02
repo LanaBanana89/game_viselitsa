@@ -24,4 +24,4 @@ $ ruby viselitsa.rb
 4. Далее запускаете игру, и, возможно, компьютер загадает именно это слово
 
 ## Демонстрация
-![](https://wmpics.pics/di-YGO1.gif)
+![](https://github.com/LanaBanana89/game_viselitsa/blob/master/viselitsa.gif)
