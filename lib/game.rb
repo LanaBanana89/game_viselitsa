@@ -28,6 +28,7 @@ class Game
     # :lost — игра проиграна
     @status = :in_progress
   end
+  
   # Метод, который возвращает массив букв загаданного слова
   def get_letters(slovo)
     if slovo == nil || slovo == ""
@@ -36,6 +37,7 @@ class Game
 
     slovo.encode('UTF-8').split("")
   end
+  
   # Метод, который отвечает на вопрос, является ли буква подходящей
   def is_good?(letter)
     @letters.include?(letter) ||
@@ -44,6 +46,7 @@ class Game
     (letter == "и" && @letters.include?("й")) ||
     (letter == "й" && @letters.include?("и"))
   end
+  
   # Метод добавляет букву к массиву подходящих букв
   def add_good_letter(letter)
     # Если в слове есть буква запишем её в число "правильных" либо "неправильных" буква
@@ -56,14 +59,17 @@ class Game
       when 'й' then @good_letters << 'и'
       end
   end
+        
   # Метод добавляет букву к массиву букв, которых нет в загаданном слове
   def add_bad_letter(letter)
     @bad_letters << letter
   end
+        
   # Метод, который отвечает на вопрос, отгадано ли все слово
   def solved?
     (@letters - @good_letters).empty?
   end
+        
   # Метод, который отвечает на вопрос, была ли уже эта буква, также
   # буквы "е" и "ё" и "и" и "й" считаются за одну
   def repeated?(letter)
@@ -74,26 +80,32 @@ class Game
     (letter == "и" && @bad_letters.include?("й")) ||
     (letter == "й" && @bad_letters.include?("и"))
   end
+        
   # Метод, который отвечает на вопрос, проиграна ли игра
   def lost?
     @status == :lost || @errors >= MAX_ERRORS
   end
+        
   # Метод, который возвращает константу MAX_ERRORS
   def max_errors
     MAX_ERRORS
   end
+        
   # Метод, который возвращает количество оставшихся ошибок
   def errors_left
     MAX_ERRORS - @errors
   end
+        
   # Метод, который отвечает на вопрос, продолжается ли игра
   def in_progress?
     @status == :in_progress
   end
+        
   # Метод, который отвечает на вопрос, выиграл ли игрок
   def won?
     @status == :won
   end
+        
   # Основной метод игры "сделать следующий шаг". В качестве параметра принимает
   # букву, которую ввел пользователь.
   def next_step(letter)
@@ -117,12 +129,12 @@ class Game
       # Если в слове нет введенной буквы — добавляем эту букву в массив
       # «плохих» букв и увеличиваем счетчик ошибок.
       add_bad_letter(letter)
-
       @errors += 1
       # Если ошибок больше 7 — статус игры меняем на :lost, проигрыш.
       @status = :lost if lost?
     end
   end
+        
   # Метод, спрашивающий пользователя букву и возвращающий ее как результат.
   def ask_next_letter
     puts "\nВведите следующую букву"
